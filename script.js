@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // تعریف رمز عبور (می‌توانید آن را تغییر دهید)
-    const ADMIN_PASSWORD = "1234";
+    const ADMIN_PASSWORD = "sohail123";
 
     // عناصر DOM
     const adminBtn = document.getElementById('admin-btn');
