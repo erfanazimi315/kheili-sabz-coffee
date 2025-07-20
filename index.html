@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> کافه خیلی سبز</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <button id="admin-btn" class="admin-btn">
+                <img src="./img/lego-hed.png" alt="لوگو کافه">
+            </button>
+            <h1>کافه خیلی سبز</h1>
+        </div>
+    </header>
+
+    <!-- دیالوگ ورود رمز -->
+    <div id="password-dialog" class="dialog">
+        <div class="dialog-content">
+            <h3>ورود به بخش مدیریت</h3>
+            <input type="password" id="admin-password" placeholder="رمز عبور را وارد کنید">
+            <button id="submit-password">تایید</button>
+            <p id="password-error" class="error-message"></p>
+        </div>
+    </div>
+
+    <nav class="categories">
+        <button class="category-btn active" data-category="coffee">
+            <i class="fas fa-coffee"></i> قهوه
+        </button>
+        <button class="category-btn" data-category="hot">
+            <i class="fas fa-fire"></i> نوشیدنی گرم
+        </button>
+        <button class="category-btn" data-category="cold">
+            <i class="fas fa-snowflake"></i> نوشیدنی سرد
+        </button>
+        <button class="category-btn" data-category="shake">
+            <i class="fas fa-glass-whiskey"></i> شیک
+        </button>
+    </nav>
+
+    <main class="menu-container">
+        <div class="products-grid" id="products-container">
+            <!-- محصولات به صورت دینامیک لود می‌شوند -->
+        </div>
+    </main>
+
+    <footer>
+        <p> کافه خیلی سبز © 2025 </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
