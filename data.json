@@ -1,0 +1,25 @@
+{
+    "products": [],
+    "categories": [
+        {
+            "id": "coffee",
+            "name": "قهوه",
+            "icon": "fa-coffee"
+        },
+        {
+            "id": "hot",
+            "name": "نوشیدنی گرم",
+            "icon": "fa-fire"
+        },
+        {
+            "id": "cold",
+            "name": "نوشیدنی سرد",
+            "icon": "fa-snowflake"
+        },
+        {
+            "id": "shake",
+            "name": "شیک",
+            "icon": "fa-glass-whiskey"
+        }
+    ]
+}
