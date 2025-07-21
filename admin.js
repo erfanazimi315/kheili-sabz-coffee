@@ -1,12 +1,7 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // بارگذاری محصولات و دسته‌بندی‌ها از localStorage
-    let products = JSON.parse(localStorage.getItem('cafe-products')) || [];
-    let categories = JSON.parse(localStorage.getItem('cafe-categories')) || [
-        { id: 'coffee', name: 'قهوه', icon: 'fa-coffee' },
-        { id: 'hot', name: 'نوشیدنی گرم', icon: 'fa-fire' },
-        { id: 'cold', name: 'نوشیدنی سرد', icon: 'fa-snowflake' },
-        { id: 'shake', name: 'شیک', icon: 'fa-glass-whiskey' }
-    ];
+document.addEventListener('DOMContentLoaded', async function () {
+    // بارگذاری داده‌ها
+    let products = await loadProducts();
+    let categories = await loadCategories();
 
     const addProductForm = document.getElementById('add-product-form');
     const adminProductsContainer = document.getElementById('admin-products-container');
@@ -19,6 +14,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let currentEditIndex = null;
     let currentEditCategoryIndex = null;
+
+    // توابع بارگذاری داده‌ها
+    async function loadProducts() {
+        try {
+            const response = await fetch('data.json');
+            const data = await response.json();
+            const localProducts = JSON.parse(localStorage.getItem('cafe-products')) || [];
+            return [...data.products, ...localProducts];
+        } catch (error) {
+            console.error('Error loading products:', error);
+            return JSON.parse(localStorage.getItem('cafe-products')) || [];
+        }
+    }
+
+    async function loadCategories() {
+        try {
+            const response = await fetch('data.json');
+            const data = await response.json();
+            const localCategories = JSON.parse(localStorage.getItem('cafe-categories')) || [];
+            return [...data.categories, ...localCategories];
+        } catch (error) {
+            console.error('Error loading categories:', error);
+            return JSON.parse(localStorage.getItem('cafe-categories')) || [
+                { id: 'coffee', name: 'قهوه', icon: 'fa-coffee' },
+                { id: 'hot', name: 'نوشیدنی گرم', icon: 'fa-fire' },
+                { id: 'cold', name: 'نوشیدنی سرد', icon: 'fa-snowflake' },
+                { id: 'shake', name: 'شیک', icon: 'fa-glass-whiskey' }
+            ];
+        }
+    }
 
     // پیش‌نمایش تصویر محصول
     imageInput.addEventListener('change', function () {
@@ -145,9 +170,26 @@ document.addEventListener('DOMContentLoaded', function () {
         return category ? category.name : categoryId;
     }
 
+    // ذخیره محصولات
+    function saveProducts() {
+        // فقط محصولات اضافه شده در localStorage ذخیره می‌شوند
+        const initialProducts = JSON.parse(localStorage.getItem('initial-products')) || [];
+        const allProducts = [...initialProducts, ...products];
+        const localProducts = allProducts.filter(product =>
+            !initialProducts.some(p => p.name === product.name && p.category === product.category)
+        );
+        localStorage.setItem('cafe-products', JSON.stringify(localProducts));
+    }
+
     // ذخیره دسته‌بندی‌ها
     function saveCategories() {
-        localStorage.setItem('cafe-categories', JSON.stringify(categories));
+        // فقط دسته‌بندی‌های اضافه شده در localStorage ذخیره می‌شوند
+        const initialCategories = JSON.parse(localStorage.getItem('initial-categories')) || [];
+        const allCategories = [...initialCategories, ...categories];
+        const localCategories = allCategories.filter(category =>
+            !initialCategories.some(c => c.id === category.id)
+        );
+        localStorage.setItem('cafe-categories', JSON.stringify(localCategories));
         window.dispatchEvent(new Event('categoriesUpdated'));
     }
 
@@ -198,9 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 products.push(newProduct);
             }
 
-            localStorage.setItem('cafe-products', JSON.stringify(products));
-
-            // ریست فرم
+            saveProducts();
             addProductForm.reset();
             imagePreview.innerHTML = '';
             displayAdminProducts();
@@ -215,12 +255,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const product = products[index];
         currentEditIndex = index;
 
-        // پر کردن فرم
         document.getElementById('product-category').value = product.category;
         document.getElementById('product-name').value = product.name;
         document.getElementById('product-price').value = product.price;
 
-        // نمایش تصویر محصول
         imagePreview.innerHTML = `
             <img src="${product.image}" alt="پیش‌نمایش تصویر" class="preview-image">
             <button type="button" class="remove-image-btn">
@@ -233,7 +271,6 @@ document.addEventListener('DOMContentLoaded', function () {
             imageInput.value = '';
         });
 
-        // اسکرول به فرم
         document.querySelector('.add-product').scrollIntoView({ behavior: 'smooth' });
     }
 
@@ -241,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function deleteProduct(index) {
         if (confirm('آیا از حذف این محصول مطمئن هستید؟ این عمل قابل بازگشت نیست.')) {
             products.splice(index, 1);
-            localStorage.setItem('cafe-products', JSON.stringify(products));
+            saveProducts();
             displayAdminProducts();
 
             if (currentEditIndex === index) {
@@ -265,7 +302,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const id = name.replace(/\s+/g, '-').toLowerCase();
 
-        // بررسی تکراری نبودن
         if (categories.some(c => c.id === id)) {
             showAlert('خطا', 'این دسته قبلا ثبت شده است', 'error');
             return;
@@ -304,7 +340,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const category = categories[index];
         const categoryId = category.id.toLowerCase();
 
-        // بررسی وجود محصولات
         const hasProducts = products.some(p =>
             p.category.toLowerCase() === categoryId
         );
@@ -352,9 +387,18 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = 'index.html';
     });
 
-
     // مقداردهی اولیه
     displayAdminProducts();
     displayCategories();
     updateCategorySelect();
+
+    // ذخیره داده‌های اولیه برای تشخیص تغییرات
+    if (!localStorage.getItem('initial-products')) {
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                localStorage.setItem('initial-products', JSON.stringify(data.products));
+                localStorage.setItem('initial-categories', JSON.stringify(data.categories));
+            });
+    }
 });
