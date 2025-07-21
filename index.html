@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کافه خیلی سبز</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- صفحه اصلی -->
     <div id="main-page">
@@ -116,62 +119,62 @@
     </div>
 
     <script>
-    // ================== بخش داده‌ها ==================
-    // داده‌های اولیه که مستقیماً در کد ذخیره شده‌اند
-    const appData = {
-        products: [
-            // مثال:
-            {
-                category: "coffee",
-                name: "اسپرسو",
-                price: 25000,
-                image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiM2YzRjMTAiLz48dGV4dCB4PSI1MCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29mZmVlPC90ZXh0Pjwvc3ZnPg=="
-            },
-            {
-                category: "hot",
-                name: "چای سبز",
-                price: 15000,
-                image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMzNzk0NjMiLz48dGV4dCB4PSI1MCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+R3JlZW4gVGVhPC90ZXh0Pjwvc3ZnPg=="
-            }
-        ],
-        categories: [
-            { id: 'coffee', name: 'قهوه', icon: 'fa-coffee' },
-            { id: 'hot', name: 'نوشیدنی گرم', icon: 'fa-fire' },
-            { id: 'cold', name: 'نوشیدنی سرد', icon: 'fa-snowflake' },
-            { id: 'shake', name: 'شیک', icon: 'fa-glass-whiskey' }
-        ]
-    };
+        // ================== بخش داده‌ها ==================
+        // داده‌های اولیه که مستقیماً در کد ذخیره شده‌اند
+        const appData = {
+            products: [
+                // مثال:
+                {
+                    category: "coffee",
+                    name: "اسپرسو",
+                    price: 25000,
+                    image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiM2YzRjMTAiLz48dGV4dCB4PSI1MCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29mZmVlPC90ZXh0Pjwvc3ZnPg=="
+                },
+                {
+                    category: "hot",
+                    name: "چای سبز",
+                    price: 15000,
+                    image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMzNzk0NjMiLz48dGV4dCB4PSI1MCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+R3JlZW4gVGVhPC90ZXh0Pjwvc3ZnPg=="
+                }
+            ],
+            categories: [
+                { id: 'coffee', name: 'قهوه', icon: 'fa-coffee' },
+                { id: 'hot', name: 'نوشیدنی گرم', icon: 'fa-fire' },
+                { id: 'cold', name: 'نوشیدنی سرد', icon: 'fa-snowflake' },
+                { id: 'shake', name: 'شیک', icon: 'fa-glass-whiskey' }
+            ]
+        };
 
-    // ================== بخش متغیرهای عمومی ==================
-    const ADMIN_PASSWORD = "sohail123";
-    let products = [...appData.products];
-    let categories = [...appData.categories];
-    let currentEditIndex = null;
-    let currentEditCategoryIndex = null;
+        // ================== بخش متغیرهای عمومی ==================
+        const ADMIN_PASSWORD = "sohail123";
+        let products = [...appData.products];
+        let categories = [...appData.categories];
+        let currentEditIndex = null;
+        let currentEditCategoryIndex = null;
 
-    // ================== بخش توابع اصلی ==================
-    // تابع بارگذاری محصولات
-    async function loadProducts() {
-        return products;
-    }
+        // ================== بخش توابع اصلی ==================
+        // تابع بارگذاری محصولات
+        async function loadProducts() {
+            return products;
+        }
 
-    // تابع بارگذاری دسته‌بندی‌ها
-    async function loadCategories() {
-        return categories;
-    }
+        // تابع بارگذاری دسته‌بندی‌ها
+        async function loadCategories() {
+            return categories;
+        }
 
-    // تابع ذخیره‌سازی داده‌ها
-    async function saveDataToFile() {
-        // اینجا داده‌ها را در متغیرهای داخلی ذخیره می‌کنیم
-        // برای ذخیره دائمی، باید فایل HTML را با داده‌های جدید جایگزین کنید
-        return true;
-    }
+        // تابع ذخیره‌سازی داده‌ها
+        async function saveDataToFile() {
+            // اینجا داده‌ها را در متغیرهای داخلی ذخیره می‌کنیم
+            // برای ذخیره دائمی، باید فایل HTML را با داده‌های جدید جایگزین کنید
+            return true;
+        }
 
-    // تابع نمایش پیغام
-    function showAlert(title, message, type = 'info') {
-        const alertDiv = document.createElement('div');
-        alertDiv.className = `alert-message ${type}`;
-        alertDiv.innerHTML = `
+        // تابع نمایش پیغام
+        function showAlert(title, message, type = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert-message ${type}`;
+            alertDiv.innerHTML = `
             <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
             <div>
                 <strong>${title}</strong>
@@ -179,150 +182,150 @@
             </div>
         `;
 
-        document.body.appendChild(alertDiv);
-        setTimeout(() => {
-            alertDiv.classList.add('fade-out');
-            setTimeout(() => alertDiv.remove(), 500);
-        }, 3000);
-    }
+            document.body.appendChild(alertDiv);
+            setTimeout(() => {
+                alertDiv.classList.add('fade-out');
+                setTimeout(() => alertDiv.remove(), 500);
+            }, 3000);
+        }
 
-    // ================== بخش صفحه اصلی ==================
-    function initMainPage() {
-        const productsContainer = document.getElementById('products-container');
-        const categoriesContainer = document.querySelector('.categories');
+        // ================== بخش صفحه اصلی ==================
+        function initMainPage() {
+            const productsContainer = document.getElementById('products-container');
+            const categoriesContainer = document.querySelector('.categories');
 
-        // نمایش دسته‌بندی‌ها
-        function displayCategories() {
-            categoriesContainer.innerHTML = '';
+            // نمایش دسته‌بندی‌ها
+            function displayCategories() {
+                categoriesContainer.innerHTML = '';
 
-            categories.forEach(category => {
-                const button = document.createElement('button');
-                button.className = 'category-btn';
-                if (category.id === 'coffee') button.classList.add('active');
-                button.setAttribute('data-category', category.id);
-                button.innerHTML = `
+                categories.forEach(category => {
+                    const button = document.createElement('button');
+                    button.className = 'category-btn';
+                    if (category.id === 'coffee') button.classList.add('active');
+                    button.setAttribute('data-category', category.id);
+                    button.innerHTML = `
                     <i class="fas ${category.icon}"></i> ${category.name}
                 `;
 
-                button.addEventListener('click', function () {
-                    document.querySelectorAll('.category-btn').forEach(btn => {
-                        btn.classList.remove('active');
+                    button.addEventListener('click', function () {
+                        document.querySelectorAll('.category-btn').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        displayProducts(category.id);
                     });
-                    this.classList.add('active');
-                    displayProducts(category.id);
+
+                    categoriesContainer.appendChild(button);
                 });
-
-                categoriesContainer.appendChild(button);
-            });
-        }
-
-        // نمایش محصولات
-        function displayProducts(categoryId = 'coffee') {
-            productsContainer.innerHTML = '';
-
-            const filteredProducts = products.filter(product => product.category === categoryId);
-
-            if (filteredProducts.length === 0) {
-                productsContainer.innerHTML = '<p class="no-products">محصولی در این دسته بندی وجود ندارد</p>';
-                return;
             }
 
-            filteredProducts.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.innerHTML = `
+            // نمایش محصولات
+            function displayProducts(categoryId = 'coffee') {
+                productsContainer.innerHTML = '';
+
+                const filteredProducts = products.filter(product => product.category === categoryId);
+
+                if (filteredProducts.length === 0) {
+                    productsContainer.innerHTML = '<p class="no-products">محصولی در این دسته بندی وجود ندارد</p>';
+                    return;
+                }
+
+                filteredProducts.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    productCard.innerHTML = `
                     <div class="product-image-container">
                         <img src="${product.image}" alt="${product.name}" class="product-image">
                     </div>
                     <h3 class="product-name">${product.name}</h3>
                     <p class="product-price">${product.price.toLocaleString()} تومان</p>
                 `;
-                productsContainer.appendChild(productCard);
+                    productsContainer.appendChild(productCard);
+                });
+            }
+
+            // مدیریت ورود به بخش مدیریت
+            const adminBtn = document.getElementById('admin-btn');
+            const passwordDialog = document.getElementById('password-dialog');
+            const submitPassword = document.getElementById('submit-password');
+            const adminPasswordInput = document.getElementById('admin-password');
+            const passwordError = document.getElementById('password-error');
+
+            adminBtn.addEventListener('click', function () {
+                passwordDialog.style.display = 'flex';
+                adminPasswordInput.focus();
             });
+
+            submitPassword.addEventListener('click', function () {
+                const enteredPassword = adminPasswordInput.value.trim();
+
+                if (enteredPassword === ADMIN_PASSWORD) {
+                    document.getElementById('main-page').style.display = 'none';
+                    document.getElementById('admin-page').style.display = 'block';
+                    initAdminPage();
+                    passwordDialog.style.display = 'none';
+                    adminPasswordInput.value = '';
+                    passwordError.textContent = '';
+                } else {
+                    passwordError.textContent = 'رمز عبور اشتباه است!';
+                }
+            });
+
+            passwordDialog.addEventListener('click', function (e) {
+                if (e.target === passwordDialog) {
+                    passwordDialog.style.display = 'none';
+                    adminPasswordInput.value = '';
+                    passwordError.textContent = '';
+                }
+            });
+
+            adminPasswordInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    submitPassword.click();
+                }
+            });
+
+            // مقداردهی اولیه
+            displayCategories();
+            displayProducts();
         }
 
-        // مدیریت ورود به بخش مدیریت
-        const adminBtn = document.getElementById('admin-btn');
-        const passwordDialog = document.getElementById('password-dialog');
-        const submitPassword = document.getElementById('submit-password');
-        const adminPasswordInput = document.getElementById('admin-password');
-        const passwordError = document.getElementById('password-error');
+        // ================== بخش صفحه مدیریت ==================
+        function initAdminPage() {
+            const addProductForm = document.getElementById('add-product-form');
+            const adminProductsContainer = document.getElementById('admin-products-container');
+            const backToMenuBtn = document.getElementById('back-to-menu');
+            const imageInput = document.getElementById('product-image');
+            const categoriesContainer = document.getElementById('categories-container');
+            const addCategoryBtn = document.getElementById('add-category-btn');
+            const newCategoryName = document.getElementById('new-category-name');
 
-        adminBtn.addEventListener('click', function () {
-            passwordDialog.style.display = 'flex';
-            adminPasswordInput.focus();
-        });
+            // به‌روزرسانی select دسته‌بندی‌ها
+            function updateCategorySelect() {
+                const select = document.getElementById('product-category');
+                select.innerHTML = '';
 
-        submitPassword.addEventListener('click', function () {
-            const enteredPassword = adminPasswordInput.value.trim();
-
-            if (enteredPassword === ADMIN_PASSWORD) {
-                document.getElementById('main-page').style.display = 'none';
-                document.getElementById('admin-page').style.display = 'block';
-                initAdminPage();
-                passwordDialog.style.display = 'none';
-                adminPasswordInput.value = '';
-                passwordError.textContent = '';
-            } else {
-                passwordError.textContent = 'رمز عبور اشتباه است!';
-            }
-        });
-
-        passwordDialog.addEventListener('click', function (e) {
-            if (e.target === passwordDialog) {
-                passwordDialog.style.display = 'none';
-                adminPasswordInput.value = '';
-                passwordError.textContent = '';
-            }
-        });
-
-        adminPasswordInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                submitPassword.click();
-            }
-        });
-
-        // مقداردهی اولیه
-        displayCategories();
-        displayProducts();
-    }
-
-    // ================== بخش صفحه مدیریت ==================
-    function initAdminPage() {
-        const addProductForm = document.getElementById('add-product-form');
-        const adminProductsContainer = document.getElementById('admin-products-container');
-        const backToMenuBtn = document.getElementById('back-to-menu');
-        const imageInput = document.getElementById('product-image');
-        const categoriesContainer = document.getElementById('categories-container');
-        const addCategoryBtn = document.getElementById('add-category-btn');
-        const newCategoryName = document.getElementById('new-category-name');
-
-        // به‌روزرسانی select دسته‌بندی‌ها
-        function updateCategorySelect() {
-            const select = document.getElementById('product-category');
-            select.innerHTML = '';
-
-            categories.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category.id;
-                option.textContent = category.name;
-                select.appendChild(option);
-            });
-        }
-
-        // نمایش محصولات در بخش مدیریت
-        function displayAdminProducts() {
-            adminProductsContainer.innerHTML = '';
-
-            if (products.length === 0) {
-                adminProductsContainer.innerHTML = '<p class="no-products">هیچ محصولی وجود ندارد</p>';
-                return;
+                categories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category.id;
+                    option.textContent = category.name;
+                    select.appendChild(option);
+                });
             }
 
-            products.forEach((product, index) => {
-                const productCard = document.createElement('div');
-                productCard.className = 'admin-product-card';
-                productCard.innerHTML = `
+            // نمایش محصولات در بخش مدیریت
+            function displayAdminProducts() {
+                adminProductsContainer.innerHTML = '';
+
+                if (products.length === 0) {
+                    adminProductsContainer.innerHTML = '<p class="no-products">هیچ محصولی وجود ندارد</p>';
+                    return;
+                }
+
+                products.forEach((product, index) => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'admin-product-card';
+                    productCard.innerHTML = `
                     <div class="admin-product-image-container">
                         <img src="${product.image}" alt="${product.name}" class="admin-product-image">
                     </div>
@@ -338,43 +341,43 @@
                         </button>
                     </div>
                 `;
-                adminProductsContainer.appendChild(productCard);
-            });
-
-            // رویدادهای ویرایش و حذف محصولات
-            document.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    editProduct(index);
+                    adminProductsContainer.appendChild(productCard);
                 });
-            });
 
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    deleteProduct(index);
+                // رویدادهای ویرایش و حذف محصولات
+                document.querySelectorAll('.edit-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        editProduct(index);
+                    });
                 });
-            });
-        }
 
-        // نمایش دسته‌بندی‌ها
-        function displayCategories() {
-            categoriesContainer.innerHTML = '';
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        deleteProduct(index);
+                    });
+                });
+            }
 
-            if (categories.length === 0) {
-                categoriesContainer.innerHTML = `
+            // نمایش دسته‌بندی‌ها
+            function displayCategories() {
+                categoriesContainer.innerHTML = '';
+
+                if (categories.length === 0) {
+                    categoriesContainer.innerHTML = `
                     <div class="empty-state">
                         <i class="fas fa-tags"></i>
                         <p>هیچ دسته‌بندی تعریف نشده است</p>
                     </div>
                 `;
-                return;
-            }
+                    return;
+                }
 
-            categories.forEach((category, index) => {
-                const categoryElement = document.createElement('div');
-                categoryElement.className = 'category-item';
-                categoryElement.innerHTML = `
+                categories.forEach((category, index) => {
+                    const categoryElement = document.createElement('div');
+                    categoryElement.className = 'category-item';
+                    categoryElement.innerHTML = `
                     <div class="category-info">
                         <i class="fas ${category.icon}"></i>
                         <span>${category.name}</span>
@@ -388,219 +391,220 @@
                         </button>
                     </div>
                 `;
-                categoriesContainer.appendChild(categoryElement);
-            });
-
-            // رویدادهای ویرایش و حذف دسته‌بندی‌ها
-            document.querySelectorAll('.edit-category-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    editCategory(index);
+                    categoriesContainer.appendChild(categoryElement);
                 });
-            });
 
-            document.querySelectorAll('.delete-category-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    deleteCategory(index);
+                // رویدادهای ویرایش و حذف دسته‌بندی‌ها
+                document.querySelectorAll('.edit-category-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        editCategory(index);
+                    });
                 });
-            });
-        }
 
-        // ویرایش محصول
-        function editProduct(index) {
-            const product = products[index];
-            currentEditIndex = index;
+                document.querySelectorAll('.delete-category-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        deleteCategory(index);
+                    });
+                });
+            }
 
-            document.getElementById('product-category').value = product.category;
-            document.getElementById('product-name').value = product.name;
-            document.getElementById('product-price').value = product.price;
+            // ویرایش محصول
+            function editProduct(index) {
+                const product = products[index];
+                currentEditIndex = index;
 
-            const imagePreview = document.createElement('div');
-            imagePreview.className = 'image-preview';
-            imagePreview.innerHTML = `
+                document.getElementById('product-category').value = product.category;
+                document.getElementById('product-name').value = product.name;
+                document.getElementById('product-price').value = product.price;
+
+                const imagePreview = document.createElement('div');
+                imagePreview.className = 'image-preview';
+                imagePreview.innerHTML = `
                 <img src="${product.image}" alt="پیش‌نمایش تصویر" class="preview-image">
                 <button type="button" class="remove-image-btn">
                     <i class="fas fa-times"></i>
                 </button>
             `;
 
-            const existingPreview = document.querySelector('.image-preview');
-            if (existingPreview) {
-                existingPreview.replaceWith(imagePreview);
-            } else {
-                const imageInputContainer = document.querySelector('.form-group:last-child');
-                imageInputContainer.insertAdjacentElement('afterend', imagePreview);
+                const existingPreview = document.querySelector('.image-preview');
+                if (existingPreview) {
+                    existingPreview.replaceWith(imagePreview);
+                } else {
+                    const imageInputContainer = document.querySelector('.form-group:last-child');
+                    imageInputContainer.insertAdjacentElement('afterend', imagePreview);
+                }
+
+                document.querySelector('.remove-image-btn').addEventListener('click', function () {
+                    imagePreview.remove();
+                    imageInput.value = '';
+                });
+
+                document.querySelector('.add-product').scrollIntoView({ behavior: 'smooth' });
             }
 
-            document.querySelector('.remove-image-btn').addEventListener('click', function () {
-                imagePreview.remove();
-                imageInput.value = '';
-            });
+            // حذف محصول
+            async function deleteProduct(index) {
+                if (confirm('آیا از حذف این محصول مطمئن هستید؟ این عمل قابل بازگشت نیست.')) {
+                    products.splice(index, 1);
+                    await saveDataToFile();
+                    displayAdminProducts();
 
-            document.querySelector('.add-product').scrollIntoView({ behavior: 'smooth' });
-        }
+                    if (currentEditIndex === index) {
+                        currentEditIndex = null;
+                        addProductForm.reset();
+                        const imagePreview = document.querySelector('.image-preview');
+                        if (imagePreview) imagePreview.remove();
+                    }
 
-        // حذف محصول
-        async function deleteProduct(index) {
-            if (confirm('آیا از حذف این محصول مطمئن هستید؟ این عمل قابل بازگشت نیست.')) {
-                products.splice(index, 1);
-                await saveDataToFile();
-                displayAdminProducts();
+                    showAlert('موفقیت', 'محصول با موفقیت حذف شد', 'success');
+                }
+            }
 
-                if (currentEditIndex === index) {
-                    currentEditIndex = null;
+            // افزودن محصول جدید
+            addProductForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const category = document.getElementById('product-category').value;
+                const name = document.getElementById('product-name').value;
+                const price = parseInt(document.getElementById('product-price').value);
+                const file = imageInput.files[0];
+
+                if (!file) {
+                    showAlert('خطا', 'لطفا تصویری برای محصول انتخاب کنید', 'error');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = async function (e) {
+                    const image = e.target.result;
+
+                    const newProduct = {
+                        category,
+                        name,
+                        price,
+                        image
+                    };
+
+                    if (currentEditIndex !== null) {
+                        // ویرایش محصول موجود
+                        products[currentEditIndex] = newProduct;
+                        currentEditIndex = null;
+                    } else {
+                        // افزودن محصول جدید
+                        products.push(newProduct);
+                    }
+
+                    await saveDataToFile();
                     addProductForm.reset();
                     const imagePreview = document.querySelector('.image-preview');
                     if (imagePreview) imagePreview.remove();
+                    displayAdminProducts();
+
+                    showAlert('موفقیت', 'محصول با موفقیت ذخیره شد!', 'success');
+                };
+                reader.readAsDataURL(file);
+            });
+
+            // افزودن دسته جدید
+            addCategoryBtn.addEventListener('click', async function () {
+                const name = newCategoryName.value.trim();
+
+                if (!name) {
+                    showAlert('خطا', 'لطفا نام دسته را وارد کنید', 'error');
+                    return;
                 }
 
-                showAlert('موفقیت', 'محصول با موفقیت حذف شد', 'success');
-            }
-        }
+                const id = name.replace(/\s+/g, '-').toLowerCase();
 
-        // افزودن محصول جدید
-        addProductForm.addEventListener('submit', async function (e) {
-            e.preventDefault();
+                if (categories.some(c => c.id === id)) {
+                    showAlert('خطا', 'این دسته قبلا ثبت شده است', 'error');
+                    return;
+                }
 
-            const category = document.getElementById('product-category').value;
-            const name = document.getElementById('product-name').value;
-            const price = parseInt(document.getElementById('product-price').value);
-            const file = imageInput.files[0];
-
-            if (!file) {
-                showAlert('خطا', 'لطفا تصویری برای محصول انتخاب کنید', 'error');
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = async function (e) {
-                const image = e.target.result;
-
-                const newProduct = {
-                    category,
+                const newCategory = {
+                    id,
                     name,
-                    price,
-                    image
+                    icon: 'fa-tag'
                 };
 
-                if (currentEditIndex !== null) {
-                    // ویرایش محصول موجود
-                    products[currentEditIndex] = newProduct;
-                    currentEditIndex = null;
-                } else {
-                    // افزودن محصول جدید
-                    products.push(newProduct);
+                categories.push(newCategory);
+                await saveDataToFile();
+                newCategoryName.value = '';
+                updateCategorySelect();
+                displayCategories();
+
+                showAlert('موفقیت', 'دسته جدید با موفقیت اضافه شد', 'success');
+            });
+
+            // ویرایش دسته
+            async function editCategory(index) {
+                const newName = prompt('نام جدید دسته:', categories[index].name);
+                if (newName && newName.trim()) {
+                    categories[index].name = newName.trim();
+                    await saveDataToFile();
+                    updateCategorySelect();
+                    displayCategories();
+
+                    showAlert('موفقیت', 'دسته با موفقیت ویرایش شد', 'success');
+                }
+            }
+
+            // حذف دسته
+            async function deleteCategory(index) {
+                const category = categories[index];
+                const categoryId = category.id.toLowerCase();
+
+                const hasProducts = products.some(p => p.category.toLowerCase() === categoryId);
+
+                if (hasProducts) {
+                    showAlert('خطا', 'این دسته دارای محصول است و نمی‌توان آن را حذف کرد', 'error');
+                    return;
                 }
 
-                await saveDataToFile();
-                addProductForm.reset();
-                const imagePreview = document.querySelector('.image-preview');
-                if (imagePreview) imagePreview.remove();
-                displayAdminProducts();
+                if (confirm(`آیا از حذف دائم دسته "${category.name}" مطمئن هستید؟`)) {
+                    categories.splice(index, 1);
+                    await saveDataToFile();
+                    updateCategorySelect();
+                    displayCategories();
 
-                showAlert('موفقیت', 'محصول با موفقیت ذخیره شد!', 'success');
-            };
-            reader.readAsDataURL(file);
-        });
-
-        // افزودن دسته جدید
-        addCategoryBtn.addEventListener('click', async function () {
-            const name = newCategoryName.value.trim();
-
-            if (!name) {
-                showAlert('خطا', 'لطفا نام دسته را وارد کنید', 'error');
-                return;
+                    showAlert('موفقیت', 'دسته با موفقیت حذف شد', 'success');
+                }
             }
 
-            const id = name.replace(/\s+/g, '-').toLowerCase();
+            // بازگشت به منو
+            backToMenuBtn.addEventListener('click', function () {
+                document.getElementById('admin-page').style.display = 'none';
+                document.getElementById('main-page').style.display = 'block';
+                initMainPage();
+            });
 
-            if (categories.some(c => c.id === id)) {
-                showAlert('خطا', 'این دسته قبلا ثبت شده است', 'error');
-                return;
-            }
-
-            const newCategory = {
-                id,
-                name,
-                icon: 'fa-tag'
-            };
-
-            categories.push(newCategory);
-            await saveDataToFile();
-            newCategoryName.value = '';
-            updateCategorySelect();
+            // مقداردهی اولیه
+            displayAdminProducts();
             displayCategories();
-
-            showAlert('موفقیت', 'دسته جدید با موفقیت اضافه شد', 'success');
-        });
-
-        // ویرایش دسته
-        async function editCategory(index) {
-            const newName = prompt('نام جدید دسته:', categories[index].name);
-            if (newName && newName.trim()) {
-                categories[index].name = newName.trim();
-                await saveDataToFile();
-                updateCategorySelect();
-                displayCategories();
-
-                showAlert('موفقیت', 'دسته با موفقیت ویرایش شد', 'success');
-            }
+            updateCategorySelect();
         }
 
-        // حذف دسته
-        async function deleteCategory(index) {
-            const category = categories[index];
-            const categoryId = category.id.toLowerCase();
-
-            const hasProducts = products.some(p => p.category.toLowerCase() === categoryId);
-
-            if (hasProducts) {
-                showAlert('خطا', 'این دسته دارای محصول است و نمی‌توان آن را حذف کرد', 'error');
-                return;
-            }
-
-            if (confirm(`آیا از حذف دائم دسته "${category.name}" مطمئن هستید؟`)) {
-                categories.splice(index, 1);
-                await saveDataToFile();
-                updateCategorySelect();
-                displayCategories();
-
-                showAlert('موفقیت', 'دسته با موفقیت حذف شد', 'success');
-            }
+        // ================== راه‌حل برای ذخیره‌سازی دائمی ==================
+        // این تابع داده‌های جدید را به appData اضافه می‌کند
+        function updateInitialData() {
+            // اینجا می‌توانید کدی بنویسید که داده‌های جدید را به appData اضافه کند
+            // سپس باید فایل HTML را با داده‌های جدید ذخیره کنید
+            console.log("برای ذخیره دائمی، باید فایل HTML را با داده‌های جدید جایگزین کنید");
+            console.log("داده‌های فعلی:", { products, categories });
         }
 
-        // بازگشت به منو
-        backToMenuBtn.addEventListener('click', function () {
-            document.getElementById('admin-page').style.display = 'none';
-            document.getElementById('main-page').style.display = 'block';
+        // ================== مقداردهی اولیه برنامه ==================
+        document.addEventListener('DOMContentLoaded', async function () {
+            // بارگذاری داده‌ها
+            products = await loadProducts();
+            categories = await loadCategories();
+
+            // نمایش صفحه اصلی
             initMainPage();
         });
-
-        // مقداردهی اولیه
-        displayAdminProducts();
-        displayCategories();
-        updateCategorySelect();
-    }
-
-    // ================== راه‌حل برای ذخیره‌سازی دائمی ==================
-    // این تابع داده‌های جدید را به appData اضافه می‌کند
-    function updateInitialData() {
-        // اینجا می‌توانید کدی بنویسید که داده‌های جدید را به appData اضافه کند
-        // سپس باید فایل HTML را با داده‌های جدید ذخیره کنید
-        console.log("برای ذخیره دائمی، باید فایل HTML را با داده‌های جدید جایگزین کنید");
-        console.log("داده‌های فعلی:", {products, categories});
-    }
-
-    // ================== مقداردهی اولیه برنامه ==================
-    document.addEventListener('DOMContentLoaded', async function () {
-        // بارگذاری داده‌ها
-        products = await loadProducts();
-        categories = await loadCategories();
-        
-        // نمایش صفحه اصلی
-        initMainPage();
-    });
     </script>
 </body>
+
 </html>
