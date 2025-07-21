@@ -1,12 +1,7 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // بارگذاری محصولات و دسته‌بندی‌ها از localStorage
-    const products = JSON.parse(localStorage.getItem('cafe-products')) || [];
-    const categories = JSON.parse(localStorage.getItem('cafe-categories')) || [
-        { id: 'coffee', name: 'قهوه', icon: 'fa-coffee' },
-        { id: 'hot', name: 'نوشیدنی گرم', icon: 'fa-fire' },
-        { id: 'cold', name: 'نوشیدنی سرد', icon: 'fa-snowflake' },
-        { id: 'shake', name: 'شیک', icon: 'fa-glass-whiskey' }
-    ];
+document.addEventListener('DOMContentLoaded', async function () {
+    // بارگذاری داده‌ها از فایل JSON و localStorage
+    let products = await loadProducts();
+    let categories = await loadCategories();
 
     const productsContainer = document.getElementById('products-container');
     const categoriesContainer = document.querySelector('.categories');
@@ -61,28 +56,55 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // تعریف رمز عبور (می‌توانید آن را تغییر دهید)
+    // تابع بارگذاری محصولات
+    async function loadProducts() {
+        try {
+            const response = await fetch('data.json');
+            const data = await response.json();
+            const localProducts = JSON.parse(localStorage.getItem('cafe-products')) || [];
+            return [...data.products, ...localProducts];
+        } catch (error) {
+            console.error('Error loading products:', error);
+            return JSON.parse(localStorage.getItem('cafe-products')) || [];
+        }
+    }
+
+    // تابع بارگذاری دسته‌بندی‌ها
+    async function loadCategories() {
+        try {
+            const response = await fetch('data.json');
+            const data = await response.json();
+            const localCategories = JSON.parse(localStorage.getItem('cafe-categories')) || [];
+            return [...data.categories, ...localCategories];
+        } catch (error) {
+            console.error('Error loading categories:', error);
+            return JSON.parse(localStorage.getItem('cafe-categories')) || [
+                { id: 'coffee', name: 'قهوه', icon: 'fa-coffee' },
+                { id: 'hot', name: 'نوشیدنی گرم', icon: 'fa-fire' },
+                { id: 'cold', name: 'نوشیدنی سرد', icon: 'fa-snowflake' },
+                { id: 'shake', name: 'شیک', icon: 'fa-glass-whiskey' }
+            ];
+        }
+    }
+
+    // بقیه کدهای مربوط به مدیریت و دیالوگ رمز عبور
     const ADMIN_PASSWORD = "sohail123";
 
-    // عناصر DOM
     const adminBtn = document.getElementById('admin-btn');
     const passwordDialog = document.getElementById('password-dialog');
     const submitPassword = document.getElementById('submit-password');
     const adminPasswordInput = document.getElementById('admin-password');
     const passwordError = document.getElementById('password-error');
 
-    // نمایش دیالوگ با کلیک روی دکمه مدیریت
     adminBtn.addEventListener('click', function () {
         passwordDialog.style.display = 'flex';
         adminPasswordInput.focus();
     });
 
-    // بررسی رمز عبور
     submitPassword.addEventListener('click', function () {
         const enteredPassword = adminPasswordInput.value.trim();
 
         if (enteredPassword === ADMIN_PASSWORD) {
-            // باز کردن صفحه مدیریت در یک تب جدید
             window.open('admin.html', '_blank');
             passwordDialog.style.display = 'none';
             adminPasswordInput.value = '';
@@ -92,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // بستن دیالوگ با کلیک خارج از آن
     passwordDialog.addEventListener('click', function (e) {
         if (e.target === passwordDialog) {
             passwordDialog.style.display = 'none';
@@ -101,13 +122,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // اجازه دهید با فشار دکمه Enter نیز رمز بررسی شود
     adminPasswordInput.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
             submitPassword.click();
         }
     });
-
 
     // مقداردهی اولیه
     displayCategories();
