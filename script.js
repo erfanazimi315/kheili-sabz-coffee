@@ -1,3 +1,12 @@
+async function loadInitialData() {
+  try {
+    const response = await fetch('data.json');
+    return await response.json();
+  } catch (error) {
+    console.error("Error loading initial data:", error);
+    return {products: [], categories: []};
+  }
+}
 document.addEventListener('DOMContentLoaded', async function () {
     // بارگذاری داده‌ها از فایل JSON و localStorage
     let products = await loadProducts();
