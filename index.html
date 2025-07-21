@@ -120,22 +120,186 @@
 
     <script>
         // ================== بخش داده‌ها ==================
-        // داده‌های اولیه که مستقیماً در کد ذخیره شده‌اند
         const appData = {
             products: [
-                // مثال:
+
+                //=== قسمت قهوه ===//
                 {
                     category: "coffee",
-                    name: "اسپرسو",
-                    price: 25000,
-                    image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiM2YzRjMTAiLz48dGV4dCB4PSI1MCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29mZmVlPC90ZXh0Pjwvc3ZnPg=="
+                    name: "تک (50/50)",
+                    price: 40000,
+                    image: "img/coffee/coffee.jpg"
+                },
+                {
+                    category: "coffee",
+                    name: "تک (70/30)",
+                    price: 35000,
+                    image: "img/coffee/coffee.jpg"
+                },
+                {
+                    category: "coffee",
+                    name: "تک (100%)",
+                    price: 55000,
+                    image: "img/coffee/coffee.jpg"
+                },
+                {
+                    category: "coffee",
+                    name: "دوبل (50/50)",
+                    price: 65000,
+                    image: "img/coffee/coffee.jpg"
+                },
+                {
+                    category: "coffee",
+                    name: "دوبل (70/30)",
+                    price: 55000,
+                    image: "img/coffee/coffee.jpg"
+                },
+                {
+                    category: "coffee",
+                    name: "دوبل (100%)",
+                    price: 75000,
+                    image: "img/coffee/coffee.jpg"
+                },
+
+                //=== قسمت نوشیدنی گرم ===//
+                {
+                    category: "hot",
+                    name: "کاپوچینو",
+                    price: 70000,
+                    image: "img/hot/image-1.jpg"
                 },
                 {
                     category: "hot",
-                    name: "چای سبز",
-                    price: 15000,
-                    image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMzNzk0NjMiLz48dGV4dCB4PSI1MCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+R3JlZW4gVGVhPC90ZXh0Pjwvc3ZnPg=="
-                }
+                    name: "کاپوچینو کلاسیک",
+                    price: 89000,
+                    image: "img/hot/image-1.jpg"
+                },
+                {
+                    category: "hot",
+                    name: "هات چاکلت",
+                    price: 70000,
+                    image: "img/hot/image-2.jpg"
+                },
+                {
+                    category: "hot",
+                    name: "ماسالا",
+                    price: 70000,
+                    image: "img/hot/image-3.jpg"
+                },
+                {
+                    category: "hot",
+                    name: "پینک چاکلت",
+                    price: 78000,
+                    image: "img/hot/image-4.jpg"
+                },
+                {
+                    category: "hot",
+                    name: "کافی میکس",
+                    price: 80000,
+                    image: "img/hot/image-5.jpg"
+                },
+                {
+                    category: "hot",
+                    name: "شیر پسته",
+                    price: 94000,
+                    image: "img/hot/image-6.jpg"
+                },
+                {
+                    category: "hot",
+                    name: "لاته",
+                    price: 89000,
+                    image: "img/hot/image-7.jpg"
+                },
+                {
+                    category: "hot",
+                    name: "کرک",
+                    price: 65000,
+                    image: "img/hot/image-8.jpg"
+                },
+                {
+                    category: "hot",
+                    name: "موکا",
+                    price: 93000,
+                    image: "img/hot/image-9.jpg"
+                },
+                {
+                    category: "hot",
+                    name: "امریکانو",
+                    price: 68000,
+                    image: "img/hot/image-10.jpg"
+                },
+
+                //=== قسمت نوشیدنی سرد ===//
+                {
+                    category: "cold",
+                    name: "آفوگاتو",
+                    price: 124000,
+                    image: "img/cold/cold.png"
+                },
+                {
+                    category: "cold",
+                    name: "بستنی با قهوه",
+                    price: 0,
+                    image: "img/cold/cold.png"
+                },
+                {
+                    category: "cold",
+                    name: "آیس لاته",
+                    price: 93000,
+                    image: "img/cold/cold.png"
+                },
+                {
+                    category: "cold",
+                    name: "آیس موکا",
+                    price: 102000,
+                    image: "img/cold/cold.png"
+                },
+                {
+                    category: "cold",
+                    name: "آیس امریکانو",
+                    price: 70000,
+                    image: "img/cold/cold.png"
+                },
+                {
+                    category: "cold",
+                    name: "آیس چاکلت",
+                    price: 85000,
+                    image: "img/cold/cold.png"
+                },
+
+                //=== قسمت شیک ===//
+                {
+                    category: "shake",
+                    name: "شیک شکلات",
+                    price: 93000,
+                    image: "img/cold/cold.png"
+                },
+                {
+                    category: "shake",
+                    name: "شیک موز",
+                    price: 99000,
+                    image: "img/cold/cold.png"
+                },
+                {
+                    category: "shake",
+                    name: "شیک وانل",
+                    price: 90000,
+                    image: "img/cold/cold.png"
+                },
+                {
+                    category: "shake",
+                    name: "شیک نوتلا",
+                    price: 149000,
+                    image: "img/cold/cold.png"
+                },
+                {
+                    category: "shake",
+                    name: "شیک توت فرنگی",
+                    price: 130000,
+                    image: "img/cold/cold.png"
+                },
+
+
             ],
             categories: [
                 { id: 'coffee', name: 'قهوه', icon: 'fa-coffee' },
