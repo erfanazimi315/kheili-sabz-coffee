@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> GREEN کافه</title>
+    <title> به کافه سبز خوش آمدید</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,7 +17,12 @@
                 <button id="admin-btn" class="admin-btn">
                     <img src="./img/lego-hed.png" alt="لوگو کافه">
                 </button>
-                <h1> GREEN کافه</h1>
+                <h1> کافه GREEN </h1>
+                <!-- بخش جستجو -->
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" class="search-input" placeholder="جستجوی محصولات...">
+                </div>
             </div>
         </header>
 
@@ -31,8 +36,22 @@
             </div>
         </div>
 
+
+        <div class="featured-slider">
+            <div class="featured-slides" id="featured-slides">
+                <!-- اسلایدها به صورت دینامیک لود می‌شوند -->
+            </div>
+        </div>
+        <div class="featured-indicators" id="featured-indicators">
+            <!-- نشانگرها به صورت دینامیک لود می‌شوند -->
+        </div>
+        </section>
+
         <nav class="categories">
-            <button class="category-btn active" data-category="coffee">
+            <button class="category-btn active" data-category="all">
+                <i class="fas fa-shopping-basket"></i> همه
+            </button>
+            <button class="category-btn" data-category="coffee">
                 <i class="fas fa-coffee"></i> قهوه
             </button>
             <button class="category-btn" data-category="hot">
@@ -125,25 +144,27 @@
         // ================== بخش داده‌ها ==================
         const appData = {
             products: [
-
                 //=== قسمت قهوه ===//
                 {
                     category: "coffee",
                     name: "تک (50/50)",
                     price: 40000,
-                    image: "img/coffee/coffee.jpg"
+                    image: "img/coffee/coffee.jpg",
+                    featured: true
                 },
                 {
                     category: "coffee",
                     name: "تک (70/30)",
                     price: 35000,
-                    image: "img/coffee/coffee.jpg"
+                    image: "img/coffee/coffee.jpg",
+                    featured: true
                 },
                 {
                     category: "coffee",
                     name: "تک (100%)",
                     price: 55000,
-                    image: "img/coffee/coffee.jpg"
+                    image: "img/coffee/coffee.jpg",
+                    featured: true
                 },
                 {
                     category: "coffee",
@@ -237,31 +258,31 @@
                     category: "cold",
                     name: "آفوگاتو",
                     price: 124000,
-                    image: "img/cold/19.png"
+                    image: "img/cold/1.jpg"
                 },
                 {
                     category: "cold",
                     name: "آیس لاته",
                     price: 93000,
-                    image: "img/cold/21.png"
+                    image: "img/cold/2.jpg"
                 },
                 {
                     category: "cold",
                     name: "آیس موکا",
                     price: 102000,
-                    image: "img/cold/19.png"
+                    image: "img/cold/3.jpg"
                 },
                 {
                     category: "cold",
                     name: "آیس امریکانو",
                     price: 70000,
-                    image: "img/cold/cold.png"
+                    image: "img/cold/4.jpg"
                 },
                 {
                     category: "cold",
                     name: "آیس چاکلت",
                     price: 85000,
-                    image: "img/cold/cold.png"
+                    image: "img/cold/5.jpg"
                 },
 
                 //=== قسمت شیک ===//
@@ -296,14 +317,43 @@
                     image: "img/cold/cold.png"
                 },
 
+                //=== قسمت میان وعده ===//
+                {
+                    category: "snack",
+                    name: "اسنک مخصوص",
+                    price: 69000,
+                    image: "img/snack/snack.png"
+                },
+                {
+                    category: "snack",
+                    name: "اسنک مرغ",
+                    price: 85000,
+                    image: "img/snack/snack.png"
+                },
+
+                {
+                    category: "snack",
+                    name: "اسنک دبل",
+                    price: 128000,
+                    image: "img/snack/snack.png"
+                },
+
+                {
+                    category: "snack",
+                    name: "اسنک مرغ دبل",
+                    price: 169000,
+                    image: "img/snack/snack.png"
+                },
+
 
             ],
             categories: [
+                { id: 'all', name: 'همه', icon: 'fa-shopping-basket' },
                 { id: 'coffee', name: 'قهوه', icon: 'fa-coffee' },
                 { id: 'hot', name: 'نوشیدنی گرم', icon: 'fa-fire' },
                 { id: 'cold', name: 'نوشیدنی سرد', icon: 'fa-snowflake' },
                 { id: 'shake', name: 'شیک', icon: 'fa-glass-whiskey' },
-                { id: 'snack', name: 'شیک', icon: 'fa-utensils' },
+                { id: 'snack', name: 'میان وعده', icon: 'fa-utensils' },
             ]
         };
 
@@ -313,6 +363,9 @@
         let categories = [...appData.categories];
         let currentEditIndex = null;
         let currentEditCategoryIndex = null;
+        let currentSlide = 0;
+        let slideInterval;
+        const SLIDE_INTERVAL_TIME = 3000; // 3 ثانیه
 
         // ================== بخش توابع اصلی ==================
         // تابع بارگذاری محصولات
@@ -355,6 +408,12 @@
         function initMainPage() {
             const productsContainer = document.getElementById('products-container');
             const categoriesContainer = document.querySelector('.categories');
+            const searchInput = document.getElementById('search-input');
+            const featuredSlides = document.getElementById('featured-slides');
+            const featuredIndicators = document.getElementById('featured-indicators');
+            const prevFeaturedBtn = document.getElementById('prev-featured');
+            const nextFeaturedBtn = document.getElementById('next-featured');
+            const allCategoryBtn = document.querySelector('.category-btn[data-category="all"]');
 
             // نمایش دسته‌بندی‌ها
             function displayCategories() {
@@ -363,7 +422,7 @@
                 categories.forEach(category => {
                     const button = document.createElement('button');
                     button.className = 'category-btn';
-                    if (category.id === 'coffee') button.classList.add('active');
+                    if (category.id === 'all') button.classList.add('active');
                     button.setAttribute('data-category', category.id);
                     button.innerHTML = `
                     <i class="fas ${category.icon}"></i> ${category.name}
@@ -382,13 +441,24 @@
             }
 
             // نمایش محصولات
-            function displayProducts(categoryId = 'coffee') {
+            function displayProducts(categoryId = 'all', searchTerm = '') {
                 productsContainer.innerHTML = '';
 
-                const filteredProducts = products.filter(product => product.category === categoryId);
+                let filteredProducts = products;
+
+                if (categoryId !== 'all') {
+                    filteredProducts = filteredProducts.filter(product => product.category === categoryId);
+                }
+
+                if (searchTerm) {
+                    const term = searchTerm.toLowerCase();
+                    filteredProducts = filteredProducts.filter(product =>
+                        product.name.toLowerCase().includes(term)
+                    );
+                }
 
                 if (filteredProducts.length === 0) {
-                    productsContainer.innerHTML = '<p class="no-products">محصولی در این دسته بندی وجود ندارد</p>';
+                    productsContainer.innerHTML = '<p class="no-products">محصولی یافت نشد</p>';
                     return;
                 }
 
@@ -405,6 +475,26 @@
                     productsContainer.appendChild(productCard);
                 });
             }
+
+
+            // مدیریت جستجو
+            searchInput.addEventListener('input', function () {
+                const term = this.value.trim();
+                if (term) {
+                    // تغییر به دسته "همه" هنگام جستجو
+                    document.querySelectorAll('.category-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    allCategoryBtn.classList.add('active');
+
+                    displayProducts('all', term);
+                } else {
+                    // اگر جستجو خالی شد، نمایش دسته فعال
+                    const activeCategory = document.querySelector('.category-btn.active');
+                    const category = activeCategory ? activeCategory.getAttribute('data-category') : 'all';
+                    displayProducts(category);
+                }
+            });
 
             // مدیریت ورود به بخش مدیریت
             const adminBtn = document.getElementById('admin-btn');
@@ -450,6 +540,7 @@
             // مقداردهی اولیه
             displayCategories();
             displayProducts();
+            displayFeaturedProducts();
         }
 
         // ================== بخش صفحه مدیریت ==================
@@ -646,7 +737,8 @@
                         category,
                         name,
                         price,
-                        image
+                        image,
+                        featured: false // به عنوان پیش‌فرض محصول پیشنهادی نیست
                     };
 
                     if (currentEditIndex !== null) {
